@@ -1,117 +1,306 @@
-# SCUBACATT
-# Proyecto SCUBACAT
 
-Este repositorio contiene el código fuente del proyecto **ScubaCat**, cuyo objetivo es el despliegue de un video/GIF animado a través de la identificación de gestos manuales mediante visión artificial.
+# 📸 Features
 
-## **NOTA IMPORTANTE SOBRE LA VERSIÓN DE PYTHON**
+- Real-time hand tracking
+- Gesture recognition using MediaPipe
+- Video playback control with gestures
+- Webcam integration
+- Lightweight and simple setup
+- Cross-platform support (Linux / Windows / macOS)
 
-El proyecto **DEBE** ejecutarse utilizando **Python  3.10.x**, ya que existen incompatibilidades y excepciones en librerías críticas (como MediaPipe) cuando se utiliza una versión diferente (3.11+ o 3.9-). El branch `main` está validado únicamente para esta versión de Python.
- 
-## **REQUISITOS DEL SISTEMA**
+---
 
-- **Lenguaje:** Python 3.10 (Obligatorio)
-- **Librerías:** OpenCV, MediaPipe, NumPy
-- **Hardware:** Cámara web y archivo de video `gato.mp4` en el directorio raíz.
+# ⚠️ IMPORTANT PYTHON VERSION NOTE
 
-## **INSTALACIÓN Y CONFIGURACIÓN (BASH)**
+This project **MUST** be executed using:
 
-Sigue estos pasos para preparar tu entorno de ejecución:
+```text
+Python 3.10.x
+```
 
-### 1. Clonar el repositorio
+The project is **NOT guaranteed to work** with:
 
-Si aún no has clonado el repositorio, puedes hacerlo con el siguiente comando:
+- Python 3.11+
+- Python 3.9 or lower
+
+This is due to compatibility issues with **MediaPipe** and some OpenCV dependencies.
+
+---
+
+# 🛠️ Requirements
+
+## Software
+
+- Python 3.10.x
+- pip
+- virtualenv (recommended)
+
+## Python Libraries
+
+- OpenCV
+- MediaPipe
+- NumPy
+
+## Hardware
+
+- Webcam
+- `gato.mp4` video file in the root directory
+
+---
+
+# 📂 Project Structure
+
+```text
+Scubacat/
+│
+├── scubacat.py
+├── gato.mp4
+├── requirements.txt
+└── README.md
+```
+
+---
+
+# 🚀 Installation & Setup
+
+## 1. Clone the repository
 
 ```bash
-git clone https://github.com/mishu006/Scubacat.git
+git clone https://github.com/Pryany4ok/Dudie.git
 cd Scubacat
 ```
 
-### 2. Crear y activar entorno virtual
+---
 
-Es altamente recomendable usar un entorno virtual para evitar conflictos con otras librerías de Python:
+## 2. Create a virtual environment
+
+Using a virtual environment is strongly recommended.
+
+### Linux / macOS
+
+```bash
+python3.10 -m venv .venv
+source .venv/bin/activate
+```
+(fish)
+```bash
+python3.10 -m venv .venv
+source .venv/bin/activate.fish
+```
+
+### Windows
 
 ```bash
 python -m venv .venv
-# En Windows:
 .venv\Scripts\activate
-# En macOS/Linux:
-source .venv/bin/activate
 ```
 
-### 3. Instalar las dependencias
+---
 
-Asegúrate de tener `pip` actualizado y luego instala las librerías necesarias:
+## 3. Upgrade pip
 
 ```bash
 python -m pip install --upgrade pip
+```
+
+---
+
+## 4. Install dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-## **EJECUCIÓN DEL PROYECTO**
+Or manually:
 
-Con el entorno configurado y las dependencias instaladas, ya puedes ejecutar el proyecto.
+```bash
+pip install opencv-python mediapipe numpy
+```
 
-### 1. Asegúrate de tener conectada tu cámara web y que el archivo de video `gato.mp4` esté en la misma carpeta que el script.
+---
 
-### 2. Ejecuta el script principal
+# ▶️ Running The Project
+
+Make sure:
+
+- Your webcam is connected
+- `gato.mp4` exists in the same folder as `scubacat.py`
+
+Then run:
 
 ```bash
 python scubacat.py
 ```
 
-Esto iniciará el sistema de detección, y debería comenzar a detectar gestos manuales para controlar la reproducción del video.
+---
 
-## **Verificación de archivo de video**
+# ✋ Gesture Logic
 
-Asegúrate de que el archivo de video llamado **`gato.mp4`** esté presente en el mismo directorio que el script **`scubacat.py`**. Si el archivo no está, el video no podrá cargarse.
+The application detects and tracks hand landmarks using MediaPipe.
 
-## **LÓGICA DE CONTROL GESTUAL**
+## ✊ Fist Gesture
 
-El sistema monitorea 21 puntos clave de la mano para ejecutar las siguientes acciones:
+When the fingertips move close to the palm base:
 
-* **GESTO DE PUÑO:** Al detectar la contracción de los dedos hacia la base de la palma, se inicia la reproducción automática del video.
-* **GESTO DE PALMA:** Al extender los dedos, el sistema detiene la captura y cierra la ventana del video.
-* **TECLA ESC:** Finaliza la captura de la cámara principal y cierra el programa.
+✅ The cat video starts playing automatically.
 
-## **GUÍA DE SOLUCIÓN DE PROBLEMAS**
+---
 
-Si encuentras problemas durante la ejecución, aquí hay algunas soluciones comunes:
+## 🖐️ Open Palm Gesture
 
-### **ERROR DE RUTA (FileNotFound)**
+When all fingers are extended:
 
-Asegúrate de que el archivo de video se llame exactamente `gato.mp4` y esté ubicado en la misma carpeta que el archivo `.py`.
+✅ The video stops and the playback window closes.
 
-### **LA CÁMARA NO ENCIENDE**
+---
 
-Verifica que ninguna otra aplicación (como Teams, Zoom, Discord, etc.) esté utilizando la cámara web en segundo plano.
+## ⎋ ESC Key
 
-### **ERROR DE ATRIBUTO (AttributeError)**
+Pressing the ESC key:
 
-Si ves un error relacionado con `mediapipe.solutions`, asegúrate de que no haya un archivo llamado `mediapipe.py` en tu carpeta local, ya que esto puede interferir con el importador de Python.
+✅ Stops the webcam capture  
+✅ Closes all windows  
+✅ Terminates the program
 
-### **ERROR DE COMANDO 'PIP'**
+---
 
-Si tu terminal no reconoce el comando `pip`, asegúrate de estar utilizando el entorno virtual correcto. Si no es reconocido, intenta usar el siguiente comando:
+# 🧠 Technologies Used
+
+| Technology | Purpose |
+|---|---|
+| Python | Main programming language |
+| OpenCV | Video capture and rendering |
+| MediaPipe | Hand tracking and gesture detection |
+| NumPy | Array and numerical operations |
+
+---
+
+# 🐧 Linux Notes
+
+On Linux distributions like:
+
+- Arch Linux
+- CachyOS
+- EndeavourOS
+- Fedora
+- Ubuntu
+
+you may need to explicitly use Python 3.10:
+
+```bash
+python3.10 scubacat.py
+```
+
+---
+
+# 🛑 Troubleshooting
+
+## ❌ `AttributeError: module 'mediapipe' has no attribute 'solutions'`
+
+Possible causes:
+
+### 1. Wrong Python version
+
+Check your Python version:
+
+```bash
+python --version
+```
+
+You MUST use:
+
+```text
+Python 3.10.x
+```
+
+---
+
+### 2. Local file conflict
+
+Make sure your project folder does NOT contain:
+
+```text
+mediapipe.py
+```
+
+or:
+
+```text
+mediapipe/
+```
+
+These names conflict with the official MediaPipe package.
+
+---
+
+## ❌ Webcam does not open
+
+Make sure no other applications are using the webcam:
+
+- Discord
+- Zoom
+- Teams
+- OBS
+- Browser camera access
+
+---
+
+## ❌ Video does not play
+
+Verify:
+
+- `gato.mp4` exists
+- File name is exactly correct
+- Video codec is supported by OpenCV
+
+---
+
+## ❌ `pip` command not found
+
+Try:
 
 ```bash
 python -m pip install --upgrade pip
 ```
 
-### **El video no se reproduce**
+---
 
-* Verifica que el archivo `gato.mp4` esté en el directorio correcto y que no haya errores de ruta.
-* Además, asegúrate de que el formato del video sea compatible con OpenCV.
+# 📦 requirements.txt Example
 
-### **Problemas con la detección de gestos**
-
-* Asegúrate de que la cámara tenga buena iluminación.
-* Ajusta la posición de las manos frente a la cámara para asegurarte de que sean visibles.
-* Si el gesto de "puño" no inicia el video, asegúrate de que los puntos de los dedos estén lo suficientemente cerca de la base de la palma.
-
-## **Instalación de dependencias**
-
-Para instalar todas las dependencias necesarias, puedes usar el archivo `requirements.txt` con el siguiente comando:
-
-```bash
-pip install -r requirements.txt
+```txt
+opencv-python
+mediapipe
+numpy
 ```
+
+---
+
+# 💡 Recommended Setup
+
+Recommended environment:
+
+| Component | Version |
+|---|---|
+| Python | 3.10.x |
+| OpenCV | Latest |
+| MediaPipe | 0.10.x |
+| OS | Linux / Windows |
+
+---
+
+
+# 👨‍💻 Author
+
+[mishuka
+](https://github.com/mishu006)
+---
+
+# ⭐ Support
+
+If you like this project:
+
+- Give the repository a star ⭐
+- Fork the project 🍴
+- Contribute improvements 🚀
+
+---
